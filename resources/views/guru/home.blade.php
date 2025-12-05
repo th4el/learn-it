@@ -9,7 +9,7 @@
 <body>
     Hallo selamat datang
     <h1>{{Auth::user()->name}}</h1>
-    <form action="{{ route('logout') }}" method="GET">
+    <form action="{{ route('logout') }}" method="POST">
         @csrf
         <button class="btn btn-danger">Logout</button>
     </form>

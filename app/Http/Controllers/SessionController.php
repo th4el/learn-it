@@ -27,10 +27,19 @@ class SessionController extends Controller
         ];
 
         if(Auth::attempt($infoLogin)){
-            return redirect('guru');
-        } else {
+            $user = Auth::user();
+            if($user->role == 'guru'){
+                return redirect('/guru');
+            } elseif($user->role == 'murid'){
+                return redirect('/murid');
+            } else {
+                Auth::logout();
+                return redirect('/test')->withErrors(['login' => 'Role tidak dikenali']);
+            }
+        } else{
             return redirect('/test')->withErrors(['login' => "Username dan password yang dimasukkan tidak sesuai"])->withInput();
         }
+        
     }
 
     public function logout(){

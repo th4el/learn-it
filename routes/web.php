@@ -2,10 +2,8 @@
 
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MuridController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SessionController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Grade;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,29 +16,15 @@ Route::middleware(['guest'])->group(function() {
 });
 
 //Log Out
-Route::get('/logout', [SessionController::class, 'logout'])->middleware('auth');
+Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
 
-//Role Guru
+//Untuk autentikasi Role Guru
 Route::middleware(['auth', 'role:guru'])->group(function(){
     Route::get('/guru', [GuruController::class, 'index']);
 });
 
+//Untuk Autentikasi Role Murid
 Route::middleware(['auth', 'role:murid'])->group(function(){
     Route::get('/murid', [MuridController::class, 'index']);
 });
 
-Route::post('/logout', [SessionController::class, 'logout'])->name('logout');
-
-
-//Gak kepakai Laravel Breezenya:
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
-require __DIR__.'/auth.php';
