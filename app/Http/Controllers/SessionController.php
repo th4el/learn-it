@@ -34,10 +34,10 @@ class SessionController extends Controller
                 return redirect('/murid');
             } else {
                 Auth::logout();
-                return redirect('/test')->withErrors(['login' => 'Role tidak dikenali']);
+                return redirect('/login')->withErrors(['login' => 'Role tidak dikenali']);
             }
         } else{
-            return redirect('/test')->withErrors(['login' => "Username dan password yang dimasukkan tidak sesuai"])->withInput();
+            return redirect('/login')->withErrors(['login' => "Username dan password yang dimasukkan tidak sesuai"])->withInput();
         }
         
     }
@@ -47,7 +47,7 @@ class SessionController extends Controller
         request()->session()->invalidate();
         request()->session()->regenerateToken();
 
-        return redirect('/test')->with('success', 'Anda berhasil logout');
+        return redirect('/login')->with('success', 'Anda berhasil logout');
 
     }
 }

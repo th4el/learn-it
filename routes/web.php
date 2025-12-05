@@ -11,8 +11,8 @@ Route::get('/', function () {
 
 //Guest-only
 Route::middleware(['guest'])->group(function() {
-    Route::get('/test', [SessionController::class, 'index']);
-    Route::post('/test', [SessionController::class, 'login']);
+    Route::get('/login', [SessionController::class, 'index']);
+    Route::post('/login', [SessionController::class, 'login']);
 });
 
 //Log Out

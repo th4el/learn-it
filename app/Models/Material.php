@@ -24,9 +24,9 @@ class Material extends Model
         return $this->belongsTo(User::class, 'teacher_id');
     }
 
-    public function class(): BelongsTo
+    public function grade(): BelongsTo
     {
-        return $this->belongsTo(Grade::class, 'class_id');
+        return $this->belongsTo(Grade::class, 'grade_id');
     }
 
     public function category(): BelongsTo
