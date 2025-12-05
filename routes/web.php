@@ -21,10 +21,12 @@ Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')
 //Untuk autentikasi Role Guru
 Route::middleware(['auth', 'role:guru'])->group(function(){
     Route::get('/guru', [GuruController::class, 'index']);
+    // Code di sini
 });
 
 //Untuk Autentikasi Role Murid
 Route::middleware(['auth', 'role:murid'])->group(function(){
     Route::get('/murid', [MuridController::class, 'index']);
+    // Code di sini
 });
 
