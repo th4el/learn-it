@@ -31,5 +31,7 @@ class DummyUsersSeeder extends Seeder
         foreach($userData as $key => $val) {
             User::create($val);
         }
+
+        User::factory(5)->create();
     }
 }
