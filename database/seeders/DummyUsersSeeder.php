@@ -25,7 +25,6 @@ class DummyUsersSeeder extends Seeder
                 'email' => 'murid@email.com',
                 'password' => bcrypt(123456),
                 'role' => 'murid',
-                'grade_id' => 1
             ],
         ];
 
