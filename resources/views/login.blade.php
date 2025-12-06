@@ -53,7 +53,6 @@
             <div class="text-center mt-3">
                 <a href="#" class="text-decoration-none forgot-link">Forgot your password?</a>
             </div>
-
         </form>
 
     </div>
