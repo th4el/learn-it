@@ -15,10 +15,11 @@ Route::middleware(['guest'])->group(function() {
     Route::post('/login', [SessionController::class, 'login']);
 });
 
-// TEMPORARY - Delete later
+// TEMPORARY HANYA UNTUK NGEDIT - Delete later
 Route::get('/register', function () {
     return view('register');
 });
+
 
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');

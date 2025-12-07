@@ -23,7 +23,9 @@
             <div class="navbar-nav mx-auto">
                 <a class="nav-link {{ request()->is('/home') ? 'active' : '' }}" href="{{ url('/home') }}">Home</a>
                 <a class="nav-link {{ request()->is('explore') ? 'active' : '' }}" href="{{ url('/explore') }}">Explore</a>
-                <a class="nav-link {{ request()->is('upload') ? 'active' : '' }}" href="{{ url('/upload') }}">Upload</a>
+                @if(!isset($hideUpload) || !$hideUpload)
+                    <a class="nav-link {{ request()->is('upload') ? 'active' : '' }}" href="{{ url('/upload') }}">Upload</a>
+                @endif
             </div>
         </div>
 
