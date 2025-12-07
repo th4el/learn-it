@@ -102,7 +102,7 @@
                 </select>
             </div>
             {{-- Piliih kelas (murid pakai js ini) --}}
-            <div id="kelas-field" class="mb-4 hidden">
+            <div id="kelas-field" class="mb-4 d-none">
                 <label for="grade_id" class="block text-gray-700 font-medium mb-2">Pilih Kelas</label>
                 <select
                     id="grade_id"
@@ -146,9 +146,9 @@
 
         roleSelect.addEventListener('change', function () {
             if (this.value === 'murid') {
-                kelasField.classList.remove('hidden');
+                kelasField.classList.remove('d-none');
             } else {
-                kelasField.classList.add('hidden');
+                kelasField.classList.add('d-none');
             }
         });
     </script>

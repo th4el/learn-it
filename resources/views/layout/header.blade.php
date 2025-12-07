@@ -29,9 +29,12 @@
             </div>
         </div>
 
-        <div class="navbar-nav ms-auto">
-            <button class="logout-btn">Logout</button>
-        </div>
+        <form action="{{route('logout')}}" method="post">
+            @csrf
+            <div class="navbar-nav ms-auto">
+                <button class="logout-btn">Logout</button>
+            </div>
+        </form>
     </div>
 </nav>
 </body>
