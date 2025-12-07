@@ -21,6 +21,7 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 
+
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
 
