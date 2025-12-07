@@ -17,7 +17,7 @@
 
         <h2 class="mb-1 fw-bold">Sign in</h2>
         <p class="text-white mb-4">
-            or <a href="#" class="text-decoration-underline text-white">create an account</a>
+            or <a href="/register" class="text-decoration-underline text-white">create an account</a>
         </p>
 
         @if ($errors->any())

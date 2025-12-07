@@ -25,7 +25,7 @@
         <h2 class="text-3xl font-bold text-[#1e3a5f] text-center mb-2">Create Account</h2>
         
 
-        <form method="POST" action="/register">
+        <form method="POST" action="{{route('register')}}">
             @csrf
 
             <!-- Full Name -->
@@ -52,6 +52,38 @@
                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2d5a7b] focus:border-transparent transition"
                     placeholder="your.email@example.com"
                 >
+            </div>
+
+            {{-- Role --}}
+            <div class="mb-4">
+                <label for="role" class="block text-gray-700 font-medium mb-2">Select Role</label>
+                <select
+                    id="role"
+                    name="role"
+                    required
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none 
+                        focus:ring-2 focus:ring-[#2d5a7b] focus:border-transparent transition"
+                >
+                    <option value="" disabled selected>Choose a role</option>
+                    <option value="guru">Guru</option>
+                    <option value="murid">Murid</option>
+                </select>
+            </div>
+            {{-- Piliih kelas (murid pakai js ini) --}}
+            <div id="kelas-field" class="mb-4 hidden">
+                <label for="grade_id" class="block text-gray-700 font-medium mb-2">Pilih Kelas</label>
+                <select
+                    id="grade_id"
+                    name="grade_id"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none 
+                        focus:ring-2 focus:ring-[#2d5a7b] focus:border-transparent transition"
+                >
+                    <option value="" disabled selected>Pilih kelas</option>
+
+                    @foreach($grades as $grade)
+                        <option value="{{ $grade->id }}">{{ $grade->name }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <!-- Password -->
@@ -95,5 +127,18 @@
             </p>
         </form>
     </div>
+    <script>
+        const roleSelect = document.getElementById('role');
+        const kelasField = document.getElementById('kelas-field');
+
+        roleSelect.addEventListener('change', function () {
+            if (this.value === 'murid') {
+                kelasField.classList.remove('hidden');
+            } else {
+                kelasField.classList.add('hidden');
+            }
+        });
+    </script>
+
 </body>
 </html>

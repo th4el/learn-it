@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\SessionController;
@@ -16,9 +17,9 @@ Route::middleware(['guest'])->group(function() {
 });
 
 // TEMPORARY - Delete later
-Route::get('/register', function () {
-    return view('register');
-});
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register.form');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
 
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
