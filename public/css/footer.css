@@ -1,0 +1,15 @@
+.footer {
+    background-color: #164255;
+    padding: 20px 0;
+}
+
+.footer-title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.footer-text {
+    font-size: 14px;
+    color: #ffffff;
+}
