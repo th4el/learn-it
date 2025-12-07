@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Grade extends Model
 {
-    protected $table = 'classes';
+    protected $table = 'grades';
 
     protected $fillable = [
         'name',
