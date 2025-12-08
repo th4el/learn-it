@@ -20,8 +20,6 @@ Route::middleware(['guest'])->group(function() {
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-
-
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
 
@@ -37,3 +35,6 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
     // Code di sini
 });
 
+Route::get('/explore', function () {
+    return view('explore');
+});
