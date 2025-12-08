@@ -32,6 +32,9 @@ Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')
 //Untuk autentikasi Role Guru
 Route::middleware(['auth', 'role:guru'])->group(function(){
     Route::get('/guru', [GuruController::class, 'index']);
+    Route::get('/upload', function () {
+        return view('guru.upload');
+    });
 });
 
 //Untuk Autentikasi Role Murid
@@ -41,3 +44,4 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
 });
 
 Route::get('/explore', [ExploreController::class, 'explore'])->name('explore');
+
