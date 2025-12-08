@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class MuridController extends Controller
 {
     function index(){
-        return view('murid.home');
+        return view('home');
     }
 }

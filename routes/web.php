@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MuridController;
@@ -25,7 +26,6 @@ Route::get('/post/{material:id}', function(Material $material){
     return view('post', ['material' => $material]);
 });
 
-
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
 
@@ -40,3 +40,4 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
     // Code di sini
 });
 
+Route::get('/explore', [ExploreController::class, 'explore'])->name('explore');
