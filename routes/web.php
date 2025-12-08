@@ -26,6 +26,11 @@ Route::get('/post/{material:id}', function(Material $material){
     return view('post', ['material' => $material]);
 });
 
+// TEMPORARY - for testing posts page
+Route::get('/posts', function () {
+    return view('posts');
+});
+
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
 
