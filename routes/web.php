@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\SessionController;
+use App\Models\Material;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +22,9 @@ Route::middleware(['guest'])->group(function() {
 // TEMPORARY - Delete later
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register.form');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::get('/post/{material:id}', function(Material $material){
+    return view('post', ['material' => $material]);
+});
 
 //Log Out
 Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')->name('logout');
@@ -26,7 +32,9 @@ Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')
 //Untuk autentikasi Role Guru
 Route::middleware(['auth', 'role:guru'])->group(function(){
     Route::get('/guru', [GuruController::class, 'index']);
-    // Code di sini
+    Route::get('/upload', function () {
+        return view('guru.upload');
+    });
 });
 
 //Untuk Autentikasi Role Murid
@@ -35,11 +43,5 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
     // Code di sini
 });
 
-Route::get('/explore', function () {
-    return view('explore');
-});
+Route::get('/explore', [ExploreController::class, 'explore'])->name('explore');
 
-// TEMPORARY - untuk upload page 
-Route::get('/upload', function () {
-    return view('guru.upload');
-});

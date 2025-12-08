@@ -21,11 +21,20 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <div class="navbar-nav mx-auto">
-                <a class="nav-link {{ request()->is('home') ? 'active' : '' }}" href="{{ url('/home') }}">Home</a>
+                @php
+                    $homeUrl = auth()->user()->role === 'guru' ? '/guru' : '/murid';
+                @endphp
+
+                <a class="nav-link {{ request()->is(trim($homeUrl, '/').'*') ? 'active' : '' }}"
+                href="{{ url($homeUrl) }}">
+                Home
+                </a>
+
                 <a class="nav-link {{ request()->is('explore') ? 'active' : '' }}" href="{{ url('/explore') }}">Explore</a>
-                @if(!isset($hideUpload) || !$hideUpload)
+                @if(auth()->user()->role === 'guru')
                     <a class="nav-link {{ request()->is('upload') ? 'active' : '' }}" href="{{ url('/upload') }}">Upload</a>
                 @endif
+
             </div>
         </div>
 
