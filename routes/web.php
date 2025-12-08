@@ -37,3 +37,9 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
 });
 
 Route::get('/explore', [ExploreController::class, 'explore'])->name('explore');
+
+// TEMPORARY - untuk upload page 
+Route::get('/upload', function () {
+    return view('guru.upload');
+});
+
