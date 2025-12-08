@@ -38,3 +38,8 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
 Route::get('/explore', function () {
     return view('explore');
 });
+
+// TEMPORARY - untuk upload page 
+Route::get('/upload', function () {
+    return view('guru.upload');
+});
