@@ -8,6 +8,6 @@ use Illuminate\Support\Facades\Auth;
 class GuruController extends Controller
 {
     function index(){
-        return view('guru.home');
+        return view('home');
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\SessionController;
@@ -35,6 +36,4 @@ Route::middleware(['auth', 'role:murid'])->group(function(){
     // Code di sini
 });
 
-Route::get('/explore', function () {
-    return view('explore');
-});
+Route::get('/explore', [ExploreController::class, 'explore'])->name('explore');
