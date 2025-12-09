@@ -248,21 +248,28 @@
 
         <!-- Upload Form Section -->
         <div class="upload-section">
-            <form action="/upload" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('upload.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="upload-area">
                     <!-- File Drop Zone -->
                     <div class="file-drop-zone" id="dropZone">
-                        <div class="upload-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h6v6h6v10H6z"/>
-                                <path d="M13 13v4h-2v-4H8l4-4 4 4h-3z"/>
-                            </svg>
-                        </div>
-                        <p><strong>Drag and Drop File here</strong> or <span class="choose-file-link" onclick="document.getElementById('fileInput').click()">Choose file</span></p>
-                        <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt">
-                    </div>
+                        <input type="file" id="fileInput" name="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" hidden>
 
+                        <div id="dropZoneContent">
+                            <div class="upload-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h6v6h6v10H6z"/>
+                                    <path d="M13 13v4h-2v-4H8l4-4 4 4h-3z"/>
+                                </svg>
+                            </div>
+                            
+                            <p id="dropZoneText"><strong>Drag and Drop File here</strong> or <span class="choose-file-link" id="chooseLink" >Choose file</span></p>
+                            <p id="dropZoneFilename" style="display:none;"><strong></strong> - <a href="#" id="chooseDifferent">Choose Different File</a></p>
+                        </div>
+
+                    </div>
+                        
+                             
                     <!-- Form Fields -->
                     <div class="form-section">
                         <div>
@@ -278,19 +285,18 @@
                         <div>
                             <label for="grade">Grade</label>
                             <select id="grade" name="grade" required>
-                                <option value="">Choose Grade</option>
-                                <option value="1">Grade 1</option>
-                                <option value="2">Grade 2</option>
-                                <option value="3">Grade 3</option>
-                                <option value="4">Grade 4</option>
-                                <option value="5">Grade 5</option>
-                                <option value="6">Grade 6</option>
-                                <option value="7">Grade 7</option>
-                                <option value="8">Grade 8</option>
-                                <option value="9">Grade 9</option>
-                                <option value="10">Grade 10</option>
-                                <option value="11">Grade 11</option>
-                                <option value="12">Grade 12</option>
+                                <option value="Kelas 1">Grade 1</option>
+                                <option value="Kelas 2">Grade 2</option>
+                                <option value="Kelas 3">Grade 3</option>
+                                <option value="Kelas 4">Grade 4</option>
+                                <option value="Kelas 5">Grade 5</option>
+                                <option value="Kelas 6">Grade 6</option>
+                                <option value="Kelas 7">Grade 7</option>
+                                <option value="Kelas 8">Grade 8</option>
+                                <option value="Kelas 9">Grade 9</option>
+                                <option value="Kelas 10">Grade 10</option>
+                                <option value="Kelas 11">Grade 11</option>
+                                <option value="Kelas 12">Grade 12</option>
                             </select>
                         </div>
 
@@ -298,12 +304,11 @@
                             <label for="subject">Subject</label>
                             <select id="subject" name="subject" required>
                                 <option value="">Choose Subject</option>
-                                <option value="math">Math</option>
-                                <option value="science">Science</option>
-                                <option value="english">English</option>
-                                <option value="history">Bahasa Indonesia</option>
-                                <option value="geography">Religion</option>
-                                <option value="geography">PKN</option>
+                                <option value="Matematika">Math</option>
+                                <option value="IPA">Science</option>
+                                <option value="IPS">Social</option>
+                                <option value="Bahasa Indonesia">Bahasa Indonesia</option>
+                                <option value="Bahasa Inggris">English</option>
                             </select>
                         </div>
 
@@ -372,69 +377,97 @@
     </div>
 
     <script>
-        let currentPage = 1;
-        const totalPages = 8;
-
-        // Drag and drop functionality
         const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
+const fileInput = document.getElementById('fileInput');
+const dropZoneContent = document.getElementById('dropZoneContent');
+const dropZoneText = document.getElementById('dropZoneText');
+const dropZoneFilename = document.getElementById('dropZoneFilename');
+const chooseLink = document.getElementById('chooseLink');
+const chooseDifferent = document.getElementById('chooseDifferent');
 
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-        });
+/* ----- SAFETY: pastikan elemen ada sebelum lanjut ----- */
+if (!dropZone || !fileInput || !dropZoneText || !dropZoneFilename) {
+    console.error('Drop zone elements missing');
+}
 
-        dropZone.addEventListener('dragleave', () => {
-            dropZone.classList.remove('dragover');
-        });
+/* ----- CLICK TO OPEN FILE PICKER ----- */
+dropZone.addEventListener('click', () => fileInput.click());
 
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files;
-                updateDropZoneText(files[0].name);
-            }
-        });
+chooseLink.addEventListener('click', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    fileInput.click();
+});
 
-        fileInput.addEventListener('change', (e) => {
-            if (e.target.files.length > 0) {
-                updateDropZoneText(e.target.files[0].name);
-            }
-        });
+/* ----- HANDLE FILE SELECT (via picker) ----- */
+fileInput.addEventListener('change', () => {
+    if (fileInput.files && fileInput.files.length > 0) {
+        const file = fileInput.files[0];
 
-        function updateDropZoneText(filename) {
-            dropZone.innerHTML = `
-                <div class="upload-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" fill="white"/>
-                    </svg>
-                </div>
-                <p><strong>${filename}</strong></p>
-                <p><span class="choose-file-link" onclick="chooseAnotherFile()">Choose different file</span></p>
-            `;
-        }
+        // update UI without touching innerHTML
+        dropZoneText.style.display = 'none';
+        dropZoneFilename.style.display = 'block';
+        dropZoneFilename.querySelector('strong').textContent = file.name;
+        dropZone.classList.add('has-file');
+    } else {
+        // user cancelled selection
+        resetDropZone();
+    }
+});
 
-        function chooseAnotherFile() {
-            
-            fileInput.value = '';
-            
-            
-            dropZone.innerHTML = `
-                <div class="upload-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm-1 2l5 5h-5V4zM6 20V4h6v6h6v10H6z"/>
-                        <path d="M13 13v4h-2v-4H8l4-4 4 4h-3z"/>
-                    </svg>
-                </div>
-                <p><strong>Drag and Drop File here</strong> or <span class="choose-file-link" onclick="document.getElementById('fileInput').click()">Choose file</span></p>
-            `;
-            
-            
-            fileInput.click();
-        }
+/* ----- CHOOSE DIFFERENT FILE (clear then reopen) ----- */
+chooseDifferent.addEventListener('click', (e) => {
+    e.preventDefault();
+    // clear selection and re-open picker
+    fileInput.value = '';
+    // for some browsers resetting value might not be enough; create small delay
+    setTimeout(() => fileInput.click(), 0);
+});
+
+/* ----- DRAG & DROP (single set of handlers) ----- */
+dropZone.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    dropZone.classList.add('dragover');
+});
+
+dropZone.addEventListener('dragleave', () => {
+    dropZone.classList.remove('dragover');
+});
+
+dropZone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+
+    const dt = e.dataTransfer;
+    if (!dt || !dt.files || dt.files.length === 0) return;
+
+    // Use DataTransfer to assign to fileInput.files (works on modern browsers)
+    // If you need multi-file support, iterate dt.files
+    const files = dt.files;
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(files[0]); // only first file; extend for multiple
+    fileInput.files = dataTransfer.files;
+
+    // Manually trigger change event so same handler runs
+    const event = new Event('change', { bubbles: true });
+    fileInput.dispatchEvent(event);
+});
+
+/* ----- RESET UI (ke keadaan awal) ----- */
+function resetDropZone() {
+    fileInput.value = '';
+    dropZoneText.style.display = '';
+    dropZoneFilename.style.display = 'none';
+    const strong = dropZoneFilename.querySelector('strong');
+    if (strong) strong.textContent = '';
+    dropZone.classList.remove('has-file', 'dragover');
+}
+
+/* ----- OPTIONAL: helper untuk debug di browser console ----- */
+function debugShowFileState() {
+    console.log('fileInput.files:', fileInput.files);
+    console.log('isConnected:', fileInput.isConnected);
+}
 
         // Pagination functionality
         function changePage(page) {
