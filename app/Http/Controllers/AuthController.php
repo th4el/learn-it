@@ -19,10 +19,26 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
+            'password' => 'required|confirmed|min:6',
             'role' => 'required',
             'grade_id' => 'nullable|required_if:role,murid'
-        ]);
+        ],
+        [
+            'name.required' => 'Nama wajib diisi',
+
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Format email tidak valid',
+            'email.unique' => 'Email sudah terdaftar',
+
+            'password.required' => 'Password wajib diisi',
+            'password.min' => 'Password minimal 6 karakter',
+            'password.confirmed' => 'Konfirmasi password tidak cocok',
+
+            'role.required' => 'Silakan pilih peran akun',
+
+            'grade_id.required_if' => 'Silakan pilih kelas jika mendaftar sebagai murid'
+        ]
+    );
 
         User::create([
             'name' => $request->name,

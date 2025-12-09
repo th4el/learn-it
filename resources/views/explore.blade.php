@@ -25,8 +25,11 @@
                     </h2>
                     <div id="sdMenu" class="accordion-collapse collapse">
                         <div class="accordion-body ps-4">
-                            <a href="#">Grade 1</a>
-                            <a href="#">Grade 2</a>
+                            @foreach ($sd as $sdGrade)
+                                <a href="{{ route('explore', ['grade'=> $sdGrade->id]) }}">
+                                    {{$sdGrade->name}}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -41,8 +44,11 @@
                     </h2>
                     <div id="smpMenu" class="accordion-collapse collapse">
                         <div class="accordion-body ps-4">
-                            <a href="#">Grade 7</a>
-                            <a href="#">Grade 8</a>
+                            @foreach ($smp as $smpGrade)
+                                <a href="{{ route('explore', ['grade'=> $smpGrade->id]) }}">
+                                    {{$smpGrade->name}}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -57,8 +63,11 @@
                     </h2>
                     <div id="smaMenu" class="accordion-collapse collapse">
                         <div class="accordion-body ps-4">
-                            <a href="#">Grade 10</a>
-                            <a href="#">Grade 11</a>
+                            @foreach ($sma as $smaGrade)
+                                <a href="{{ route('explore', ['grade'=> $smaGrade->id]) }}">
+                                    {{$smaGrade->name}}
+                                </a>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -82,8 +91,8 @@
             <!-- Breadcrumbs -->
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">SMA</a></li>
-                    <li class="breadcrumb-item active">Grade 11</li>
+                    <li class="breadcrumb-item"><a href="#">{{$level}}</a></li>
+                    <li class="breadcrumb-item active">{{$grade->name}}</li>
                 </ol>
             </nav>
 
@@ -91,37 +100,24 @@
             <div class="row">
 
                 <!-- CARD -->
-                <div class="col-md-4 mb-4">
-                    <div class="subject-card">
-                        <img src="/img/logo.png" alt="">
-                        <div class="p-3 text-center">
-                            <h5 class="fw-bold">Mathematics</h5>
-                            <button class="learn-btn">Learn</button>
+                @forelse ($categories as $category)
+                    <div class="col-md-4 mb-4">
+                        <div class="subject-card">
+                            <img src="/img/logo.png" alt="">
+                            <div class="p-3 text-center">
+                                    <h5 class="fw-bold">{{$category->name}}</h5>
+                                    <a href="{{ route('post.index', ['grade' => $grade->id, 'category' => $category->id]) }}">
+                                        <button class="learn-btn">Learn</button>
+                                    </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    <div class="col-12 text-center text-muted mt-5">
+                        <p>Belum ada materi untuk kelas ini.</p>
+                    </div>
+                @endforelse
 
-                <!-- CARD -->
-                <div class="col-md-4 mb-4">
-                    <div class="subject-card">
-                        <img src="/img/logo.png" alt="">
-                        <div class="p-3 text-center">
-                            <h5 class="fw-bold">Science</h5>
-                            <button class="learn-btn">Learn</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CARD -->
-                <div class="col-md-4 mb-4">
-                    <div class="subject-card">
-                        <img src="/img/logo.png" alt="">
-                        <div class="p-3 text-center">
-                            <h5 class="fw-bold">Bahasa Indonesia</h5>
-                            <button class="learn-btn">Learn</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

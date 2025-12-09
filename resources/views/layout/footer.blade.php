@@ -14,5 +14,3 @@
         <p class="footer-text mb-0">© 2025 LearnIt. All rights reserved.</p>
     </div>
 </footer>
-</body>
-</html>
