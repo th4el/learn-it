@@ -19,12 +19,7 @@ class UploadController extends Controller
 
 
     public function store(Request $request) {
-            //mempermudah validate
-           
-            // $subject_val = ['math','science','english','bahasa_indonesia','religion','PKN'];
-            
-
-            
+            //validate        
             $validatedData = $request->validate([
                 'file' => [
                     'required',
@@ -58,7 +53,7 @@ class UploadController extends Controller
             ]);
 
             
-        
+            //sebelum run jalankan "php artisan storage:link" dulu agar bisa tersimpan
             $filepath = $request->file('file')->store('materials', 'public');
 
             $category = Category::where('name', $validatedData['subject'])->firstOrFail();
