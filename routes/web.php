@@ -50,4 +50,6 @@ Route::get('/explore', [ExploreController::class, 'index'])->name('explore');
 Route::get('/posts', [PostsController::class, 'index'])->name('post.index');
 Route::get('/material/{material}', [MaterialController::class, 'show'])->name('materials.show');
 
-
+Route::get('/quote', function () {
+    return view('quote');
+});
