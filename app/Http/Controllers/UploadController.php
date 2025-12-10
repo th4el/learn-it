@@ -19,11 +19,7 @@ class UploadController extends Controller
 
 
     public function store(Request $request) {
-            //mempermudah validate
-           
-            // $subject_val = ['math','science','english','bahasa_indonesia','religion','PKN'];
-            
-
+            //validate
             
             $validatedData = $request->validate([
                 'file' => [
@@ -58,12 +54,14 @@ class UploadController extends Controller
             ]);
 
             
-        
+            //perlu "php artisan storage:link" dulu agar dapat tersimpan di public\storage\materials dan bs diakses browser
             $filepath = $request->file('file')->store('materials', 'public');
 
+            // read db untuk record dengan nama yg sesuai dgn hasil form
             $category = Category::where('name', $validatedData['subject'])->firstOrFail();
             $grade = Grade::where('name', $validatedData['grade'])->firstOrFail();
             
+            // create record
             Material::create([  
                 'teacher_id' => Auth::id(),
                 'grade_id' => $grade->id,
@@ -73,7 +71,8 @@ class UploadController extends Controller
                 'pdf_path' => $filepath,
             ]);
 
-            dd(Material::latest()->first());
+            // debug hasil
+            // dd(Material::latest()->first());
 
 
         

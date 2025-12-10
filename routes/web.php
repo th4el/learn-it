@@ -9,6 +9,7 @@ use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\DebugController;
 use App\Http\Controllers\UploadController;
+use App\Http\Controllers\SearchController;
 
 use App\Models\Material;
 use Illuminate\Support\Facades\Route;
@@ -45,12 +46,17 @@ Route::middleware(['auth', 'role:guru'])->group(function(){
     //     return view('guru.upload');
     // });
 
-     Route::get('/upload', [UploadController::class,'index'])->name('upload.index');
+    Route::get('/upload', [UploadController::class,'index'])->name('upload.index');
     Route::post('/upload', [UploadController::class,'store'])->name('upload.store');
 
 });
 
 
+// Result Page
+Route::get('/search',[SearchController::class, 'index'])->name('search');
+// Route::get('/result', function (){
+//     return view('search');
+// });
 
 
 //Untuk Autentikasi Role Murid
