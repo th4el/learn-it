@@ -19,8 +19,7 @@ class UploadController extends Controller
 
 
     public function store(Request $request) {
-            //validate
-            
+            //validate        
             $validatedData = $request->validate([
                 'file' => [
                     'required',
@@ -54,7 +53,7 @@ class UploadController extends Controller
             ]);
 
             
-            //perlu "php artisan storage:link" dulu agar dapat tersimpan di public\storage\materials dan bs diakses browser
+            //sebelum run jalankan "php artisan storage:link" dulu agar bisa tersimpan
             $filepath = $request->file('file')->store('materials', 'public');
 
             // read db untuk record dengan nama yg sesuai dgn hasil form
