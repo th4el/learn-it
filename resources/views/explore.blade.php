@@ -6,6 +6,9 @@
     <title>Explore</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/explore.css') }}">
+
+
+    
 </head>
 <body>
 @include('layout.header')
@@ -79,9 +82,9 @@
         <div class="col-md-10 p-4">
 
             <!-- Search Bar -->
-            <form class="mb-4">
+            <form class="mb-4" action="{{  route('search')  }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search....">
+                    <input type="text" class="form-control" name="search" placeholder="Search...." required>
                     <button class="btn btn-outline-secondary d-flex align-items-center justify-content-center" type="submit">
                         <img src="{{ asset('img/vector.png') }}" alt="search" style="width: 18px; height: 18px;">
                     </button>

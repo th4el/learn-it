@@ -32,5 +32,8 @@ class CategorySeeder extends Seeder
         Category::create([
             'name' => 'Bahasa Inggris',
         ]);
+
+
+        
     }
 }

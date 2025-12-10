@@ -12,7 +12,7 @@ class Material extends Model
 
     protected $fillable = [
         'teacher_id',
-        'class_id',
+        'grade_id',
         'category_id',
         'title',
         'description',
