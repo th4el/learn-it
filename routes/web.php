@@ -7,12 +7,19 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\MuridController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SessionController;
+use App\Http\Controllers\DebugController;
+use App\Http\Controllers\UploadController;
+
 use App\Models\Material;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/debug',[DebugController::class,'index']);
+
 
 //Guest-only
 Route::middleware(['guest'])->group(function() {
@@ -34,10 +41,17 @@ Route::post('/logout', [SessionController::class, 'logout'])->middleware('auth')
 //Untuk autentikasi Role Guru
 Route::middleware(['auth', 'role:guru'])->group(function(){
     Route::get('/guru', [GuruController::class, 'index']);
-    Route::get('/upload', function () {
-        return view('guru.upload');
-    });
+    // Route::post('/upload', function () {
+    //     return view('guru.upload');
+    // });
+
+     Route::get('/upload', [UploadController::class,'index'])->name('upload.index');
+    Route::post('/upload', [UploadController::class,'store'])->name('upload.store');
+
 });
+
+
+
 
 //Untuk Autentikasi Role Murid
 Route::middleware(['auth', 'role:murid'])->group(function(){
