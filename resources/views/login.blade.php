@@ -41,18 +41,9 @@
                 <input type="password" name="password" class="form-control input-box" placeholder="Password" required>
             </div>
 
-            <div class="d-flex align-items-center mb-3">
-                <input type="checkbox" id="remember" name="remember" class="form-check-input me-2">
-                <label for="remember" class="form-check-label text-white">Remember me</label>
-            </div>
-
             <button class="btn btn-primary w-100 sign-in-btn" type="submit">
                 Sign in
             </button>
-
-            <div class="text-center mt-3">
-                <a href="#" class="text-decoration-none forgot-link">Forgot your password?</a>
-            </div>
         </form>
 
     </div>
