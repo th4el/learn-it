@@ -32,7 +32,7 @@
 
                 <a class="nav-link {{ request()->is('explore') ? 'active' : '' }}" href="{{ url('/explore') }}">Explore</a>
                 @if(auth()->user()->role === 'guru')
-                    <a class="nav-link {{ request()->is('upload') ? 'active' : '' }}" href="{{ url('/upload') }}">Upload</a>
+                    <a class="nav-link {{ request()->routeIs('upload.index') ? 'active' : '' }}" href="{{ route('upload.index') }}">Upload</a>
                 @endif
 
             </div>
