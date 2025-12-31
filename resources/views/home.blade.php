@@ -40,7 +40,7 @@
             .search-container {
                 display: flex;
                 align-items: center;
-                width:100%;
+                /* width:100%; */
                 background: white;
                 border-radius: 8px;
                 box-shadow: 0 20px 60px rgba(0,0,0,0.3);
@@ -76,24 +76,21 @@
         </style>
     </head>
     <body>
-        
         @include('layout.header', ['hideUpload' => true]) 
+
         <div class="hero-section">
             <div class="hero-content">
                 <h1 class="hero-title">What are we learning today?</h1>
                 
                 <!-- Search Bar -->
-                <div class="search-container">
-                    <form action="{{route('search')}}" method="GET" id="search-form">    
-                        <input type="text" class="search-input" name="search" placeholder="Search....." form="search-form" required>
-                        <button class="search-btn" type="submit" form="search-form">
+                    <form action="{{route('search')}}" method="GET" id="search-form" class="search-container" >    
+                        <input type="text" class="search-input" name="search" placeholder="Search....." required>
+                        <button class="search-btn" type="submit">
                             <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
                     </form>
-                
-                </div>
             </div>
         </div>
 
