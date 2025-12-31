@@ -28,10 +28,10 @@
         "LOG_CHANNEL": "stderr",
         "SESSION_DRIVER": "cookie",
         "DB_CONNECTION": "mysql",
-        "DB_HOST": "4gg.h.filess.io",
+        "DB_HOST": "c2ea47.h.filess.io",
         "DB_PORT": "3306",
-        "DB_DATABASE": "learn_it",
-        "DB_USERNAME": "root",
-        "DB_PASSWORD": ""
+        "DB_DATABASE": "learn_it_campsnowdo",
+        "DB_USERNAME": "learn_it_campsnowdo",
+        "DB_PASSWORD": "435c433e6c3ca8502a8056cd0f8a86b4a9cef83d"
     }
 }
