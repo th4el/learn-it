@@ -17,7 +17,7 @@ class CheckRole
     public function handle(Request $request, Closure $next, $role): Response
     {
         if(!Auth::check()){
-            return redirect('/test')->withErrors("Silahkan login terlebih dahulu");
+            return redirect('/login')->withErrors("Silahkan login terlebih dahulu");
         }
 
         if(Auth::user()->role !== $role){
